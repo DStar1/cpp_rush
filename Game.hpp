@@ -12,14 +12,14 @@
 
 #ifndef GAME_HPP
 # define GAME_HPP
-
-#include <string>
-#include <iostream>
+# include <string>
+# include <iostream>
 # include <ncurses.h>
 # include <curses.h>
 # include <iostream>
 # include <thread>
 # include <chrono>
+# include <ctime>
 
 class Game {
     public:
@@ -27,8 +27,8 @@ class Game {
 		Game(void);
 		Game(int col, int row);
 		~Game(void);
-		// Game(Game const & src);
-		// Game &operator=(Game const & rhs);
+		Game(Game const & src);
+		Game &operator=(Game const & rhs);
 
 		int getMapX(void) const;
 		int getMapY(void) const;
@@ -45,5 +45,5 @@ class Game {
 
 };
 
-
+void 	init_ncurses(void);
 #endif

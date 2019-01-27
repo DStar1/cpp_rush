@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Player.hpp"
-// #include "Game.hpp"
+#include "Game.hpp"
 
 Player::Player(void) :
 x(25),
@@ -80,9 +80,9 @@ void 		Player::getInput(char c, Game *game)
 {
 	if (c == 27)
         exit(0);
-	if ((c == KEY_LEFT || c == '4') && (this->getX() > 2))
+	if ((c == '4') && (this->getX() > 2))
 		moveLeft();
-	else if ((c == KEY_RIGHT || c == '6') && (this->getX() < game->getMapX() + 2))
+	else if ((c == '6') && (this->getX() < game->getMapX() + 2))
 		moveRight();
 	// else if (c == ' ')
 	// 	playerBullet();

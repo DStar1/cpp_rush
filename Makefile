@@ -1,18 +1,26 @@
-NAME = ft_retro
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/01/26 20:42:40 by lhernand          #+#    #+#              #
+#    Updated: 2019/01/26 20:53:23 by lhernand         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+NAME = ft_retro
+CXX = clang++
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors -lncurses
 SRC = Game.cpp \
-	main.cpp \
-	Player.cpp
+		Player.cpp \
+		main.cpp
 
 all: $(NAME)
 
-LIBS = -lncurses
-
-FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors
-
 $(NAME):
-	# clang++ $(FLAGS) $(SRC) $(LIBS) -o $(NAME)
-	clang++ $(SRC) $(LIBS) -o $(NAME)
+	$(CXX) $(SRC) $(CXXFLAGS) -o $(NAME)
 
 clean:
 	/bin/rm -f *.o
@@ -21,3 +29,5 @@ fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
+
+Phony: all, clean, fclean, re
