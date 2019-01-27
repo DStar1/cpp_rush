@@ -6,28 +6,29 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:50 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 16:22:16 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/26 17:13:01 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
+#include "Missile.hpp"
 #include <ctime>
 
 
-Game::Game(void) :
-        x(20),
-        y(5),
-        mapx(100),
-        mapy(100)
-{
-    srand(time(0));
-}
+// Game::Game(void) :
+//         x(20),
+//         y(5),
+//         mapx(100),
+//         mapy(100)
+// {
+//     srand(time(0));
+// }
 
 Game::Game(int col, int row) :
-        x(20),
-        y(5),
         mapy(col),
-        mapx(row)
+        mapx(row),
+        px((row-2)/2),
+        py(col-1)
 {
     srand(time(0));
 }
@@ -37,24 +38,13 @@ Game::~Game(void){
     return;
 }
 
-// Game &Game::operator=(Game const &r){
-//     if (this != &r){
-//         x = r.x;
-//         y = r.y;
-//         mapx = r.mapx;
-//         // hitPoints = r.hitPoints;
-//         // maxHitPoints = r.maxHitPoints;
-//     }
-//     return (*this);
-// }
-
 void		Game::getInput(int c) {
 	if (c == 27) {
 		// setEndgame(0);
         exit(0);
 	}
-	// if (c == ' ')
-	// 	playerBullet();
+	if (c == ' ')
+		missile();
 	if (c == KEY_RIGHT || c == KEY_LEFT || c == '6' || c == '4'
 		|| c == '1' || c == '3') {
 		mvaddch(getY(), getX(), ' ');
@@ -67,12 +57,12 @@ void		Game::getInput(int c) {
 		moveLeft();
 	if ((c == '3') && getX() < mapx - 1)
 	{
-		// playerBullet();
+		// missile();
 		moveRight();
 	}
 	if ((c == '1') && getX() > 2)
 	{
-		// playerBullet();
+		// missile();
 		moveLeft();
 	}
 	drawPlayer();
@@ -90,16 +80,24 @@ void	Game::drawPlayer(void) {
 }
 
 int Game::getX(void) {
-    return x;
+    return px;
 }
 
 int Game::getY(void) {
-    return y;
+    return py;
 }
 
 void Game::moveRight(){
-    x++;
+    px++;
 }
-void Game::moveLeft(){
-    x--;
+void Game::moveLeft(void){
+    px--;
+}
+void Game::missile(void){
+    Missile *newMissile = new Missile(getX(), getY());
+    missiles.push_back(newMissile);
+    if (bx == -1)
+        bx = px;
+    if (bx)
+    by++;
 }

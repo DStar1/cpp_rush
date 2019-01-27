@@ -1,54 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Game.hpp                                           :+:      :+:    :+:   */
+/*   Missile.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:55 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 17:15:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/26 17:17:25 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H_
-# define GAME_H_
+#ifndef MISSILE_H_
+# define MISSILE_H_
 
-#include <string>
-#include <iostream>
-# include <ncurses.h>
-# include <curses.h>
-# include <thread>
-# include <chrono>
-#include <vector>
+#include "Game.hpp"
 
-class Game {
+class Missile {
     public:
-        // Game(std::string n);
-        // Game(void);
-        Game(int col, int row);
-        ~Game(void);
+        Missile(int x, int y);
+        ~Missile(void);
 
-        void getInput(int c);
-        int getX(void);
-        int getY(void);
+        int getBX(void);
+        int getBY(void);
 
-        void moveRight();
-        void moveLeft();
-        void drawPlayer(void);
-
-        void missile(void);
-        vector< Missile > missiles;
+        void moveUp(void);
+        void drawMissile(void);
 
     private:
-        int px;
-        int py;
-        int mapx;
-        int mapy;
-
         int bx;
         int by;
+        // int player_enemy;
 
 };
-
 
 #endif
