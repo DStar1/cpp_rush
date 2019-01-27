@@ -36,7 +36,8 @@ int	main() {
 
 	init_ncurses();
 	Game *game = new Game(); // creates an instance of game
-	Player *player = new Player();  // creates the movable player
+	Player *player = new Player(100);  // creates the movable player
+	Missile *missile = new Missile();
 	Enemy enemies[30]; // number of enemies on the stack.
 	for (int i = 0; i < number; i++)
 	{
@@ -54,13 +55,15 @@ int	main() {
 	int i = 0;
 	while (1)
 	{
+		// missile->drawMissile(game);
 		if ((c = getch()) != ERR)
 		{
-			player->getInput(c, game);
+			player->getInput(c, game, missile);
 		}
 		while (i < number)
 		{
 			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
+			missile->drawMissile(game);
 		}
 		i = 0;
 	}

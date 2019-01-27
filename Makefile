@@ -6,7 +6,7 @@
 #    By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 20:42:40 by lhernand          #+#    #+#              #
-#    Updated: 2019/01/27 00:33:57 by lhernand         ###   ########.fr        #
+#    Updated: 2019/01/27 12:14:57 by lhernand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors -lncurses
 SRC = Game.cpp \
 		Player.cpp \
 		Enemy.cpp \
-		main.cpp
+		Missile.cpp \
+		main.cpp 
 
 all: $(NAME)
 

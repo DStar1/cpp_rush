@@ -13,6 +13,7 @@
 #ifndef Enemy_HPP
 # define Enemy_HPP
 # include "Game.hpp"
+# include <unistd.h>
 
 class Enemy
 {
@@ -41,7 +42,7 @@ class Enemy
 	private:
 		int			x;
 		int			y;
-		int			N; // health indicator
+		int			health; // health indicator
 		int 			l; // has it collided on the left? 1 yes 0 no
 		int 			r; // has it collided on the right? 1 yes 0 no
 };

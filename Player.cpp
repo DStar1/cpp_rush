@@ -10,13 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Player.hpp"
 #include "Game.hpp"
+#include "Player.hpp"
 
 Player::Player(void) :
 x(25),
-y(25)
+y(25),
+numberOfMissiles(100)
 {
+	std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
+	this->missile = new Missile[100];
+	return ;
+}
+Player::Player(int numberOfMissiles) :
+x(25),
+y(25),
+numberOfMissiles(numberOfMissiles)
+{
+	std::cout << numberOfMissiles << std::endl;
+	this->missile = new Missile[numberOfMissiles];
 	return ;
 }
 Player::~Player(void)
@@ -69,14 +81,14 @@ void 		Player::moveLeft(void)
 void 		Player::drawPlayer(void)
 {
 	attron(COLOR_PAIR(1));
-	mvaddch(this->getY(), this->getX(), '*');
-	mvaddch(this->getY() + 1, getX() + 1, '*');
-	mvaddch(this->getY() + 1, getX() - 1, '*');
+	mvaddch(this->getY(), this->getX(), '^');
+	mvaddch(this->getY() + 1, getX() + 1, '^');
+	mvaddch(this->getY() + 1, getX() - 1, '^');
 	attroff(COLOR_PAIR(1));
 	box(stdscr, 0, 0);
 	refresh();
 }
-void 		Player::getInput(char c, Game *game)
+void 		Player::getInput(char c, Game *game, Missile *missile)
 {
 	if (c == 27)
 		exit(0);
@@ -84,8 +96,12 @@ void 		Player::getInput(char c, Game *game)
 		moveLeft();
 	else if ((c == '6') && (this->getX() < game->getMapX() + 2))
 		moveRight();
-	// else if (c == ' ')
-	// 	playerBullet(); // implementation of projectiles here
+	else if (c == ' ')
+	{
+		missile->setX(this->getX());
+		missile->setY(this->getY() - 1);
+		missile->drawMissile(game); // implementation of projectiles here
+	}
 	drawPlayer();
 
 }

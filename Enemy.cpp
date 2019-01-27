@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 
 #include "Enemy.hpp"
-#include "Game.hpp"
-#include <unistd.h> // library for usleep
+
 Enemy::Enemy(void) :
 x(2),
 y(2),
-N(1),
+Health(1),
 l(1),
 r(0)
 {
 	return ;
 }
-Enemy::Enemy(int startCol, int startRow, int number) :
+Enemy::Enemy(int startCol, int startRow, int health) :
 x(startCol),
 y(startRow),
-N(number),
+health(number),
 l(0),
 r(0)
 {
@@ -115,7 +114,7 @@ void 		Enemy::drawEnemy(Game *game)//game instance is passed to know the map siz
 	attroff(COLOR_PAIR(2));
 	box(stdscr, 0, 0);
 	refresh();
-	usleep(1000); // creates small delay for the enemies as they move left to right and back.
+	// usleep(1000); // creates small delay for the enemies as they move left to right and back.
 }
 // void 		Enemy::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {
