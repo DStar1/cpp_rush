@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:55 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 17:15:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/26 18:19:43 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 # include <curses.h>
 # include <thread>
 # include <chrono>
-#include <vector>
+#include "Missile.hpp"
+// #include <vector>
 
 class Game {
     public:
-        // Game(std::string n);
-        // Game(void);
         Game(int col, int row);
         ~Game(void);
 
@@ -35,18 +34,22 @@ class Game {
         void moveRight();
         void moveLeft();
         void drawPlayer(void);
+        void drawMissiles(void);
 
-        void missile(void);
-        vector< Missile > missiles;
+        void shootMissile(void);
+        void clearMissiles(void);
 
     private:
         int px;
         int py;
         int mapx;
         int mapy;
+        int score;
 
-        int bx;
-        int by;
+        int numMissiles;
+        int numMissilesShot;
+        Missile *missiles;
+
 
 };
 

@@ -6,35 +6,30 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:50 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 17:13:01 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/26 19:35:45 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
 #include "Missile.hpp"
 #include <ctime>
+#include <iostream>
 
-
-// Game::Game(void) :
-//         x(20),
-//         y(5),
-//         mapx(100),
-//         mapy(100)
-// {
-//     srand(time(0));
-// }
-
-Game::Game(int col, int row) :
-        mapy(col),
-        mapx(row),
-        px((row-2)/2),
-        py(col-1)
+Game::Game(int col, int row)
 {
     srand(time(0));
+	mapy = col;
+	mapx = row;
+	px = ((row-2)/2);
+	py = (col-1);
+	numMissiles = 14;
+	numMissilesShot = 0;
+	missiles = new Missile[numMissiles];
 }
 
 
 Game::~Game(void){
+	delete [] missiles;
     return;
 }
 
@@ -44,9 +39,8 @@ void		Game::getInput(int c) {
         exit(0);
 	}
 	if (c == ' ')
-		missile();
-	if (c == KEY_RIGHT || c == KEY_LEFT || c == '6' || c == '4'
-		|| c == '1' || c == '3') {
+		shootMissile();
+	if (c == KEY_RIGHT || c == KEY_LEFT || c == '6' || c == '4' || c == '1' || c == '3') {
 		mvaddch(getY(), getX(), ' ');
 		mvaddch(getY() + 1, getX() + 1, ' ');
 		mvaddch(getY() + 1, getX() - 1, ' ');
@@ -57,14 +51,15 @@ void		Game::getInput(int c) {
 		moveLeft();
 	if ((c == '3') && getX() < mapx - 1)
 	{
-		// missile();
+		// shootMissile();
 		moveRight();
 	}
 	if ((c == '1') && getX() > 2)
 	{
-		// missile();
+		// shootMissile();
 		moveLeft();
 	}
+	// std::cout << "Player" << std::endl;
 	drawPlayer();
 }
 
@@ -77,6 +72,34 @@ void	Game::drawPlayer(void) {
 	// drawEnemy();
 	box(stdscr, 0, 0);
 	refresh();
+}
+
+void	Game::drawMissiles(void) {
+	for (int i = 0; i < numMissiles; i++) {
+		if (missiles[i].getAlive()){
+			//clear
+			missiles[i].clear();
+			//moveUp
+			missiles[i].moveUp();
+			//draw
+			missiles[i].drawMissile();
+			//if y == 1 setAlive(0) clearMissile()
+			if (missiles[i].getMY() == 1) {
+				missiles[i].setInfo(0,0,0);
+				missiles[i].clear();
+			}
+			//if hit == true do something
+			
+		}
+	}
+}
+
+//Maybe not needed
+void	Game::clearMissiles(void) {
+	for (int i = 0; i < numMissiles; i++) {
+		if (missiles[i].getAlive())
+			missiles[i].clear();
+	}
 }
 
 int Game::getX(void) {
@@ -93,11 +116,15 @@ void Game::moveRight(){
 void Game::moveLeft(void){
     px--;
 }
-void Game::missile(void){
-    Missile *newMissile = new Missile(getX(), getY());
-    missiles.push_back(newMissile);
-    if (bx == -1)
-        bx = px;
-    if (bx)
-    by++;
+void Game::shootMissile(void){
+    // Missile newshootMissile = Missile(getX(), getY());
+	// // numshootMissiles++; //checking <
+	// std::cout << "Shooting"  << std::endl;
+    missiles[numMissilesShot].setInfo(getX(),getY() - 5, 1);
+	// std::cout << "After shooting"  << std::endl;
+	// // std::cout << "x: " << getX() << "y: " << getY() << std::endl;
+	// missiles[numMissilesShot] = newshootMissile;
+	numMissilesShot++;
+	// missiles[numMissilesShot].clear();
+	drawMissiles();//???
 }
