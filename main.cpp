@@ -16,9 +16,17 @@
 
 #include "Game.hpp"
 #include "Player.hpp"
-
+#include "Enemy.hpp"
 int	main() {
 	int c = 0;
+	int startX; // initial x value for the enemies
+	int x;
+	int y;
+	int number; // number of enemies to spawn
+
+	startX = x = 10;
+	y = 2;
+	number = 30;
 	srand(time(NULL));
 
 	initscr();//creates std screen
@@ -27,18 +35,37 @@ int	main() {
 	curs_set(0);
 
 	init_ncurses();
-	Game *game = new Game();
-	Player *player = new Player();
+	Game *game = new Game(); // creates an instance of game
+	Player *player = new Player();  // creates the movable player
+	Enemy enemies[30]; // number of enemies on the stack.
+	for (int i = 0; i < number; i++)
+	{
+		enemies[i].setX(x += 5); //spawns enemies at varying x + 5 offsets
+		if (i % 10 == 0)
+		{
+			enemies[i].setY(y += 5); // will increase the height.
+			enemies[i].setX(x = startX); // returns to the original startX val
+		}
+		enemies[i].setY(y);
+		enemies[i].setN(1);
+
+	}
 	player->drawPlayer();
+	int i = 0;
 	while (1)
 	{
 		if ((c = getch()) != ERR)
 		{
-		// game->getInput(c);
 			player->getInput(c, game);
 		}
+		while (i < number)
+		{
+			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
+		}
+		i = 0;
 	}
-	delete player;
-	delete game;
+	endwin();
+	delete player; //delete player on the heap
+	delete game; // delete the game on the heap
 	return (0);
 }

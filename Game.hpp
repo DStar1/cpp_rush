@@ -33,12 +33,6 @@ class Game {
 		int getMapX(void) const;
 		int getMapY(void) const;
 
-		// void getInput(int c);
-		// int getX(void);
-		// int getY(void);
-		// void moveRight();
-		// void moveLeft();
-		// void drawPlayer(void);
 	private:
 		int mapx;
 		int mapy;

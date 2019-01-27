@@ -79,38 +79,13 @@ void 		Player::drawPlayer(void)
 void 		Player::getInput(char c, Game *game)
 {
 	if (c == 27)
-        exit(0);
+		exit(0);
 	if ((c == '4') && (this->getX() > 2))
 		moveLeft();
 	else if ((c == '6') && (this->getX() < game->getMapX() + 2))
 		moveRight();
 	// else if (c == ' ')
-	// 	playerBullet();
+	// 	playerBullet(); // implementation of projectiles here
 	drawPlayer();
 
-
-
-
-	// if (c == ' ')
-	// 	playerBullet();
-	// if (c == KEY_RIGHT || c == KEY_LEFT || c == '6' || c == '4'
-	// 	|| c == '1' || c == '3') {
-	// 	mvaddch(getY(), getX(), ' ');
-	// 	mvaddch(getY() + 1, getX() + 1, ' ');
-	// 	mvaddch(getY() + 1, getX() - 1, ' ');
-	// }
-	// if ((c == KEY_RIGH || c == '6') && getX() < /*mapx*/ mapX - 1)
-	// 	moveRight();
-	// if ((c == KEY_LEFT || c == '4' ) && getX() > 2)
-	// 	moveLeft();
-	// if ((c == '3') && getX() < /*mapx*/ mapX - 1)
-	// {
-	// 	// playerBullet();
-	// 	moveRight();
-	// }
-	// if ((c == '1') && getX() > 2)
-	// {
-	// 	// playerBullet();
-	// 	moveLeft();
-	// }
 }
