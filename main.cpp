@@ -15,15 +15,16 @@
 // #include "GameEntity.hpp"
 
 #include "Game.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
-Game *init_ncurses() {
+void *init_ncurses() {
     int col = 0;
     int row = 0;
     getmaxyx(stdscr, col, row);
 
-    Game *game = new Game(col - 2, row - 2);
+
 
     keypad(stdscr, TRUE);// Keys on numberpad
     nodelay(stdscr, TRUE);//
@@ -44,10 +45,10 @@ Game *init_ncurses() {
 	attroff(COLOR_PAIR(4));
 	// drawEnemy();
 	box(stdscr, 0, 0);
-	game->drawPlayer();
+	// game->drawPlayer();
 	refresh();
 
-	return (game);
+	// return (game);
 }
 
 int	main() {
@@ -59,18 +60,16 @@ int	main() {
 	noecho();
 	curs_set(0);
 
-	Game *game = init_ncurses();
-
+	init_ncurses();
+	Game *game = new Game();
+	Player *player = new Player();
+	player->drawPlayer();
 	while (1) {
         if ((c = getch()) != ERR)
-            game->getInput(c);
-
-		// if (end)
-		// {
-		// 	clear();
-		// 	return (0);
-		// };
+	  	{
+            // game->getInput(c);
+		  player->getInput(c, game);
+	  	}
 	}
-	
 	return (0);
 }

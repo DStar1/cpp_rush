@@ -1,12 +1,14 @@
 NAME = ft_retro
 
-SRC = *.cpp
+SRC = Game.cpp \
+	main.cpp \
+	Player.cpp
 
 all: $(NAME)
 
 LIBS = -lncurses
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -std=c++98 -pedantic-errors
 
 $(NAME):
 	# clang++ $(FLAGS) $(SRC) $(LIBS) -o $(NAME)

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H_
-# define GAME_H_
+#ifndef GAME_HPP
+# define GAME_HPP
 
 #include <string>
 #include <iostream>
@@ -23,24 +23,25 @@
 
 class Game {
     public:
-        // Game(std::string n);
-        Game(void);
-        Game(int col, int row);
-        ~Game(void);
+		// Game(std::string n);
+		Game(void);
+		Game(int col, int row);
+		~Game(void);
+		// Game(Game const & src);
+		// Game &operator=(Game const & rhs);
 
-        void getInput(int c);
-        int getX(void);
-        int getY(void);
+		int getMapX(void) const;
+		int getMapY(void) const;
 
-        void moveRight();
-        void moveLeft();
-        void drawPlayer(void);
-
-    private:
-        int x;
-        int y;
-        int mapx;
-        int mapy;
+		// void getInput(int c);
+		// int getX(void);
+		// int getY(void);
+		// void moveRight();
+		// void moveLeft();
+		// void drawPlayer(void);
+	private:
+		int mapx;
+		int mapy;
 
 };
 
