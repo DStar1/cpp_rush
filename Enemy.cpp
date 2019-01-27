@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Enemy.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 00:33:47 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 14:14:33 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 Enemy::Enemy(void) :
 x(2),
 y(2),
-Health(1),
+N(1),
 l(1),
 r(0)
 {
 	return ;
 }
-Enemy::Enemy(int startCol, int startRow, int health) :
+Enemy::Enemy(int startCol, int startRow, int h) :
 x(startCol),
 y(startRow),
-health	(number),
+N	(h),
 l(0),
 r(0)
 {
@@ -114,7 +114,7 @@ void 		Enemy::drawEnemy(Game *game)//game instance is passed to know the map siz
 	attroff(COLOR_PAIR(2));
 	box(stdscr, 0, 0);
 	refresh();
-	// usleep(1000); // creates small delay for the enemies as they move left to right and back.
+	usleep(1000); // creates small delay for the enemies as they move left to right and back.
 }
 // void 		Enemy::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {

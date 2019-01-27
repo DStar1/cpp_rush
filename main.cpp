@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:54:34 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 16:18:19 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 15:09:33 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int	main() {
 	initscr();//creates std screen
 	cbreak();//enter raw modal
 	noecho();
+	// nodelay();
 	curs_set(0);
 
-	init_ncurses();
 	Game *game = new Game(); // creates an instance of game
-	Player *player = new Player(100);  // creates the movable player
-	Missile *missile = new Missile();
+	game->init_ncurses();
+	Player *player = new Player();  // creates the movable player
+	// Missile *missile = new Missile();
 	Enemy enemies[30]; // number of enemies on the stack.
 	for (int i = 0; i < number; i++)
 	{
+		
 		enemies[i].setX(x += 5); //spawns enemies at varying x + 5 offsets
 		if (i % 10 == 0)
 		{
@@ -51,6 +53,7 @@ int	main() {
 		enemies[i].setN(1);
 
 	}
+	player->setGame(game);
 	player->drawPlayer();
 	int i = 0;
 	while (1)
@@ -58,13 +61,17 @@ int	main() {
 		// missile->drawMissile(game);
 		if ((c = getch()) != ERR)
 		{
-			player->getInput(c, game, missile);
+			player->getInput(c, game);
 		}
 		while (i < number)
 		{
-			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
-			missile->drawMissile(game);
+			if (enemies[i].getN() > 0){
+				enemies[i++].drawEnemy(game); //loop that crreates all the enemies
+				// missile->drawMissile(game);
+			}
 		}
+		player->drawMissiles();   
+		player->drawPlayer();
 		i = 0;
 	}
 	endwin();

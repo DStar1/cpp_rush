@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.cpp                                          :+:      :+:    :+:   */
+/*   Missile.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 00:33:47 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 15:02:42 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Missile::Missile(void) :
 x(25),
 y(25),
-N(1)
+N(0)
 {
 	return ;
 }
@@ -75,14 +75,18 @@ void 		Missile::moveUp(void)
 }
 void 		Missile::drawMissile(Game *game)
 {
-	if (this->getY() > 0 && this->getY() < game->getMapY() - 1)
+	if (this->N > 0 && (this->getY() > 0 && this->getY() < game->getMapY() - 1))
+	{
 		this->moveUp();
-	attron(COLOR_PAIR(3));
-	mvaddch(this->getY() - 1, this->getX(), '|');
-	attroff(COLOR_PAIR(3));
-	box(stdscr, 0, 0);
-	refresh();
-	usleep(1000); // creates small delay for the enemies as they move left to right and back.
+		attron(COLOR_PAIR(3));
+		mvaddch(this->getY() - 1, this->getX(), '|');
+		attroff(COLOR_PAIR(3));
+		box(stdscr, 0, 0);
+		refresh();
+		usleep(1000); // creates small delay for the enemies as they move left to right and back.
+	}
+	else
+		this->N = 0;
 }
 // void 		Missile::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {

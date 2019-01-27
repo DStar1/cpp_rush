@@ -6,22 +6,20 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:50 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/26 16:22:16 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 14:59:03 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
 
-Game::Game(void) :
-mapx(100),
-mapy(100)
-{
-    srand(time(0));
-}
+// Game::Game(void) :
+// mapx(100),
+// mapy(100)
+// {
+//     srand(time(0));
+// }
 
-Game::Game(int col, int row) :
-mapx(row),
-mapy(col)
+Game::Game(void)
 {
     srand(time(0));
 }
@@ -52,12 +50,14 @@ int Game::getMapY(void) const
 	return (this->mapy);
 }
 //non-member function
-void  init_ncurses() {
+void  Game::init_ncurses(void) {
 	int col = 0;
 	int row = 0;
 	int c = 0;
 
 	getmaxyx(stdscr, col, row);
+	this->mapx = row;
+	this->mapy = col;
 	keypad(stdscr, TRUE);// Keys on numberpad
 	nodelay(stdscr, TRUE);//
 

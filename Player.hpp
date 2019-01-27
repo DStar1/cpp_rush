@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Player.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:48 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/26 17:23:49 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 14:48:48 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ class Player
 
 		int 			getX(void) const;
 		int			getY(void) const;
+		// int getMapX(void);
+		// int getMapY(void);
 
 		void 		setX(int x);
 		void 		setY(int y);
+		// void 		setMapX(int x);
+		// void 		setMapY(int y);
 
 		//methods for movements
 		void 		moveRight(void);
@@ -36,11 +40,17 @@ class Player
 
 		//methods for game mechanics using ncursus
 		void 		drawPlayer(void);
-		void 		getInput(char c, Game *game, Missile *missile);
+		void 		getInput(char c, Game *game);
+		void		setGame(Game *game);
+		void 		drawMissiles(void);
+		int			currMissile;
 	private:
 		int			x;
 		int			y;
+		// int			mapX;
+		// int			mapY;
 		int 			numberOfMissiles;
 		Missile		*missile;
+		Game		*game;
 };
 #endif

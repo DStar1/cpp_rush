@@ -42,7 +42,7 @@ class Enemy
 	private:
 		int			x;
 		int			y;
-		int			health; // health indicator
+		int			N; // health indicator
 		int 			l; // has it collided on the left? 1 yes 0 no
 		int 			r; // has it collided on the right? 1 yes 0 no
 };
