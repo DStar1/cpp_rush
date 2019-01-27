@@ -24,7 +24,7 @@ r(0)
 Enemy::Enemy(int startCol, int startRow, int health) :
 x(startCol),
 y(startRow),
-health(number),
+health	(number),
 l(0),
 r(0)
 {
