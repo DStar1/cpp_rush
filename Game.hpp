@@ -25,14 +25,13 @@ class Game {
     public:
 		// Game(std::string n);
 		Game(void);
-		Game(int col, int row);
 		~Game(void);
 		Game(Game const & src);
 		Game &operator=(Game const & rhs);
 
 		int getMapX(void) const;
 		int getMapY(void) const;
-
+		void init_ncurses(void);
 	private:
 		int mapx;
 		int mapy;

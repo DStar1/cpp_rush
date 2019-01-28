@@ -23,11 +23,13 @@ class Missile : public Junk
 		Missile(Missile const & src);
 		Missile &operator=(Missile const & rhs);
 
-		// void 		setY(int y);
 		//methods for movement
 		void 		moveUp(void);
 		//methods for game mechanics using ncursus
+		int			missileCollision(int x, int y);
 		void 		drawMissile(Game *game);
+		void 		clearMissile(void);
+		void 		killMissile(void);
 
 };
 

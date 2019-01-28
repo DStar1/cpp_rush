@@ -33,7 +33,18 @@ Missile 		&Missile::operator=(Missile const & rhs)
 	this->N = rhs.getN();
 	return (*this);
 }
+void 		Missile::clearMissile(void)
+{
+	mvaddch(this->getY(), this->getX(), ' ');
+	// usleep(100);
+	refresh();
+}
 
+void 		Missile::killMissile(void)
+{
+	this->clearMissile();
+	this->setN(0);
+}
 void 		Missile::moveUp(void)
 {
 	mvaddch(this->getY(), this->getX(), ' ');
@@ -41,12 +52,36 @@ void 		Missile::moveUp(void)
 }
 void 		Missile::drawMissile(Game *game)
 {
-	if (this->getY() > 0 && this->getY() < game->getMapY() - 1)
+	if (this->getN() > 0 && (this->getY() > 0 && this->getY() < game->getMapY() - 1))
+	{
 		this->moveUp();
-	attron(COLOR_PAIR(3));
-	mvaddch(this->getY() - 1, this->getX(), '|');
-	attroff(COLOR_PAIR(3));
-	box(stdscr, 0, 0);
-	refresh();
-	usleep(1000);
+		attron(COLOR_PAIR(3));
+		mvaddch(this->getY(), this->getX(), '0');
+		attroff(COLOR_PAIR(3));
+		box(stdscr, 0, 0);
+		refresh();
+		// usleep(10000); // creates small delay for the enemies as they move left to right and back.
+	}
+	else
+		this->N = 0;
+}
+int			Missile::missileCollision(int nx, int ny)
+{
+	if ((this->getY() == ny && this->getX() == nx))
+	//  ||
+	// 	(this->getY() == ny && this->getX() == nx+1) ||
+	// 	(this->getY() == ny && this->getX() == nx-1) ||
+	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
+	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
+	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
+	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
+	// 	(this->getY() == ny-1 && this->getX() == nx+1) ||
+	// 	(this->getY() == ny-1 && this->getX() == nx+1))
+	{
+		this->killMissile();
+		// box(stdscr, 0, 0);
+		// refresh();
+		return 1;
+	}
+	return 0;
 }

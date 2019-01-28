@@ -28,9 +28,14 @@ class Player : public Junk
 		void 		moveLeft(void);
 		//methods for game mechanics using ncursus
 		void 		drawPlayer(void);
-		void 		getInput(char c, Game *game, Missile *missile);
+		void 		setGame(Game *game);
+		void 		drawMissiles(void);
+		void 		getInput(char c, Game *game);
+		int 			missilesCollisions(int ex, int ey);
+		int 			currMissile;
 	private:
 		int 			numberOfMissiles;
 		Missile		*missile;
+		Game 		*game;
 };
 #endif

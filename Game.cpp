@@ -18,14 +18,6 @@ mapy(100)
 {
     srand(time(0));
 }
-
-Game::Game(int col, int row) :
-mapx(row),
-mapy(col)
-{
-    srand(time(0));
-}
-
 Game::~Game(void)
 {
     return;
@@ -43,21 +35,23 @@ Game		&Game::operator=(Game const & rhs)
 	this->mapy = rhs.getMapY();
 	return (*this);
 }
-int Game::getMapX(void) const
+int 		Game::getMapX(void) const
 {
 	return (this->mapx);
 }
-int Game::getMapY(void) const
+int 		Game::getMapY(void) const
 {
 	return (this->mapy);
 }
 //non-member function
-void  init_ncurses() {
+void  	Game::init_ncurses(void) {
 	int col = 0;
 	int row = 0;
 	int c = 0;
 
 	getmaxyx(stdscr, col, row);
+	this->mapx = row;
+	this->mapy = col;
 	keypad(stdscr, TRUE);// Keys on numberpad
 	nodelay(stdscr, TRUE);//
 
