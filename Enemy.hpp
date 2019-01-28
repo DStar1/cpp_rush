@@ -13,36 +13,22 @@
 #ifndef Enemy_HPP
 # define Enemy_HPP
 # include "Game.hpp"
+# include "Junk.hpp"
 # include <unistd.h>
 
-class Enemy
+class Enemy : public Junk
 {
 	public:
 		Enemy(void);
-		Enemy(int startCol, int startRow, int number);
 		~Enemy(void);
 		Enemy(Enemy const & src);
 		Enemy &operator=(Enemy const & rhs);
-
-		int 			getX(void) const;
-		int			getY(void) const;
-		int 			getN(void) const;
-
-		void 		setN(int number);
-		void 		setX(int x);
-		void 		setY(int y);
-
 		//methods for movements
 		void 		moveRight(void);
 		void 		moveLeft(void);
-
 		//methods for game mechanics using ncursus
 		void 		drawEnemy(Game *game);
-		// void 		getInput(char c, Game *game); // don't think  we need this
 	private:
-		int			x;
-		int			y;
-		int			health; // health indicator
 		int 			l; // has it collided on the left? 1 yes 0 no
 		int 			r; // has it collided on the right? 1 yes 0 no
 };

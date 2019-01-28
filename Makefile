@@ -17,7 +17,8 @@ SRC = Game.cpp \
 		Player.cpp \
 		Enemy.cpp \
 		Missile.cpp \
-		main.cpp 
+		Junk.cpp \
+		main.cpp
 
 all: $(NAME)
 

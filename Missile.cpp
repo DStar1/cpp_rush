@@ -12,17 +12,7 @@
 
 #include "Missile.hpp"
 
-Missile::Missile(void) :
-x(25),
-y(25),
-N(1)
-{
-	return ;
-}
-Missile::Missile(int startCol, int startRow, int number) :
-x(startCol),
-y(startRow),
-N(number)
+Missile::Missile(void)
 {
 	return ;
 }
@@ -43,30 +33,6 @@ Missile 		&Missile::operator=(Missile const & rhs)
 	this->N = rhs.getN();
 	return (*this);
 }
-int			Missile::getX(void) const
-{
-	return (this->x);
-}
-int 			Missile::getY(void) const
-{
-	return (this->y);
-}
-int 			Missile::getN(void) const
-{
-	return (this->N);
-}
-void 		Missile::setX(int x)
-{
-	this->x = x;
-}
-void 		Missile::setY(int y)
-{
-	this->y = y;
-}
-void 		Missile::setN(int number)
-{
-	this->N = number;
-}
 
 void 		Missile::moveUp(void)
 {
@@ -82,17 +48,5 @@ void 		Missile::drawMissile(Game *game)
 	attroff(COLOR_PAIR(3));
 	box(stdscr, 0, 0);
 	refresh();
-	usleep(1000); // creates small delay for the enemies as they move left to right and back.
+	usleep(1000);
 }
-// void 		Missile::getInput(char c, Game *game) //game instance is passed to know the map size;
-// {
-// 	if (c == 27)
-// 		exit(0);
-// 	if ((c == '4') && (this->getX() > 2))
-// 		moveLeft();
-// 	else if ((c == '6') && (this->getX() < game->getMapX() + 2))
-// 		moveRight();
-// 	// else if (c == ' ')
-// 	// 	MissileBullet();
-// 	drawMissile(game);
-// }

@@ -14,21 +14,10 @@
 #include "Player.hpp"
 
 Player::Player(void) :
-x(25),
-y(25),
 numberOfMissiles(100)
 {
 	std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
 	this->missile = new Missile[100];
-	return ;
-}
-Player::Player(int numberOfMissiles) :
-x(25),
-y(25),
-numberOfMissiles(numberOfMissiles)
-{
-	std::cout << numberOfMissiles << std::endl;
-	this->missile = new Missile[numberOfMissiles];
 	return ;
 }
 Player::~Player(void)
@@ -47,22 +36,7 @@ Player 		&Player::operator=(Player const & rhs)
 	this->y = rhs.getY();
 	return (*this);
 }
-int			Player::getX(void) const
-{
-	return (this->x);
-}
-int 			Player::getY(void) const
-{
-	return (this->y);
-}
-void 		Player::setX(int x)
-{
-	this->x = x;
-}
-void 		Player::setY(int y)
-{
-	this->y = y;
-}
+
 void 		Player::moveRight(void)
 {
 	mvaddch(getY(), getX(), ' ');

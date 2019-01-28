@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.hpp                                         :+:      :+:    :+:   */
+/*   Junk.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/26 17:23:48 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/26 17:23:49 by lhernand         ###   ########.fr       */
+/*   Created: 2019/01/27 15:05:10 by lhernand          #+#    #+#             */
+/*   Updated: 2019/01/27 15:05:11 by lhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MISSILE_HPP
-# define MISSILE_HPP
-# include "Game.hpp"
-# include "Junk.hpp"
-# include <unistd.h> // library for usleep
-class Missile : public Junk
+
+#ifndef JUNK_HPP
+# define JUNK_HPP
+
+class Junk
 {
 	public:
-		Missile(void);
-		~Missile(void);
-		Missile(Missile const & src);
-		Missile &operator=(Missile const & rhs);
+		Junk(void);
+		~Junk(void);
+		Junk(Junk const & src);
+		Junk &operator=(Junk const & rhs);
 
-		// void 		setY(int y);
-		//methods for movement
-		void 		moveUp(void);
-		//methods for game mechanics using ncursus
-		void 		drawMissile(Game *game);
+		int 			getX(void) const;
+		int			getY(void) const;
+		int 			getN(void) const;
 
+		void 		setN(int N);
+		void 		setX(int x);
+		void 		setY(int y);
+
+	protected:
+		int			x;
+		int			y;
+		int 			N;
 };
-
 #endif

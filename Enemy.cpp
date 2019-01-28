@@ -11,25 +11,25 @@
 /* ************************************************************************** */
 
 #include "Enemy.hpp"
-
+// # include "Junk.hpp"
 Enemy::Enemy(void) :
-x(2),
-y(2),
-Health(1),
+// x(2),
+// y(2),
+// N(1),
 l(1),
 r(0)
 {
 	return ;
 }
-Enemy::Enemy(int startCol, int startRow, int health) :
-x(startCol),
-y(startRow),
-health	(number),
-l(0),
-r(0)
-{
-	return ;
-}
+// Enemy::Enemy(int startCol, int startRow, int N) :
+// x(startCol),
+// y(startRow),
+// N(N),
+// l(0),
+// r(0)
+// {
+// 	return ;
+// }
 Enemy::~Enemy(void)
 {
 	std::cout << "Enemy Destroyed" << std::endl;
@@ -42,35 +42,35 @@ Enemy 		&Enemy::operator=(Enemy const & rhs)
 {
 	if (this == &rhs)
 		return (*this);
-	this->x = rhs.getX();
-	this->y = rhs.getY();
-	this->N = rhs.getN();
+	// this->x = rhs.getX();
+	// this->y = rhs.getY();
+	// this->N = rhs.getN();
 	return (*this);
 }
-int			Enemy::getX(void) const
-{
-	return (this->x);
-}
-int 			Enemy::getY(void) const
-{
-	return (this->y);
-}
-int 			Enemy::getN(void) const
-{
-	return (this->N);
-}
-void 		Enemy::setX(int x)
-{
-	this->x = x;
-}
-void 		Enemy::setY(int y)
-{
-	this->y = y;
-}
-void 		Enemy::setN(int number)
-{
-	this->N = number;
-}
+// int			Enemy::getX(void) const
+// {
+// 	return (this->x);
+// }
+// int 			Enemy::getY(void) const
+// {
+// 	return (this->y);
+// }
+// int 			Enemy::getN(void) const
+// {
+// 	return (this->N);
+// }
+// void 		Enemy::setX(int x)
+// // {
+// // 	this->x = x;
+// // }
+// void 		Enemy::setY(int y)
+// {
+// 	this->y = y;
+// }
+// void 		Enemy::setN(int number)
+// {
+// 	Junk::setN(number);
+// }
 void 		Enemy::moveRight(void)
 {
 	mvaddch(getY(), getX(), ' ');
@@ -114,7 +114,7 @@ void 		Enemy::drawEnemy(Game *game)//game instance is passed to know the map siz
 	attroff(COLOR_PAIR(2));
 	box(stdscr, 0, 0);
 	refresh();
-	// usleep(1000); // creates small delay for the enemies as they move left to right and back.
+	usleep(1000); // creates small delay for the enemies as they move left to right and back.
 }
 // void 		Enemy::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {
