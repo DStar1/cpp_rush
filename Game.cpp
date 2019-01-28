@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:49:50 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/27 21:25:33 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 22:45:58 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,6 @@ void  	Game::init_ncurses(void) {
 	attron(COLOR_PAIR(4));
 	mvaddch(0, 0, c);
 	attroff(COLOR_PAIR(4));
-	// drawEnemy();
 	box(stdscr, 0, 0);
-	// game->drawPlayer();
 	refresh();
-
-	// return (game);
 }

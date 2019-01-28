@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:42 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 21:01:22 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 22:49:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Player::Player(void) :
 numberOfMissiles(100)
 {
-	std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
+	// std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
 	this->missile = new Missile[100];
 	this->currMissile = 0;
 	return ;
@@ -43,7 +43,7 @@ void 		Player::moveRight(void)
 	mvaddch(getY(), getX(), ' ');
 	mvaddch(getY() + 1, getX() + 1, ' ');
 	mvaddch(getY() + 1, getX() - 1, ' ');
-	this->setX(x + 1);
+	this->setX(x + 2);
 
 }
 void 		Player::moveLeft(void)
@@ -51,7 +51,7 @@ void 		Player::moveLeft(void)
 	mvaddch(getY(), getX(), ' ');
 	mvaddch(getY() + 1, getX() + 1, ' ');
 	mvaddch(getY() + 1, getX() - 1, ' ');
-	this->setX(x - 1);
+	this->setX(x - 2);
 }
 void 		Player::drawPlayer(void)
 {
@@ -65,25 +65,16 @@ void 		Player::drawPlayer(void)
 }
 int 		Player::missilesCollisions(int ex, int ey)
 {
-	// usleep(5000);
 	for (int i = 0; i < this->numberOfMissiles; i++)
 	{
-		// std::string s = std::to_string(this->missile[this->currMissile-1].getX()) + " " + std::to_string(this->missile[this->currMissile-1].getY());
-		// mvwprintw(stdscr, 2, 2, s.c_str());
 		if (this->missile[i].missileCollision(ex, ey))
-		{
-			// this->missile[i].getN() && 
-			// std::cout << "coords" << std::endl;
 			return 1;
-			// enemy.killEnemy();// maybe just
-		}
 	}
 	return 0;
 }
 void		Player::setGame(Game *game)
 {
 	this->game = game;
-	// std::cout << this->game->getMapY() << ", " << this->game->getMapX() << std::endl;
 	this->setX(this->game->getMapX()/2);
 	this->setY(this->game->getMapY()-4);
 
@@ -107,13 +98,9 @@ void 		Player::getInput(char c, Game *game)
 		moveRight();
 	else if (c == ' ')
 	{
-		// missile->setX(this->getX());
-		// missile->setY(this->getY() - 1);
-		// missile->drawMissile(game); // implementation of projectiles here
 		this->missile[currMissile].setX(this->getX());
 		this->missile[currMissile].setY(this->getY());
-		this->missile[currMissile].setN(1);//health is 3?
-		// missile->drawMissile(game); // implementation of projectiles here
+		this->missile[currMissile].setN(1);//set health
 		currMissile++;
 		currMissile %= this->numberOfMissiles;
 	}

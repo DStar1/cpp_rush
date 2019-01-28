@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 21:33:59 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 22:48:09 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 Missile::Missile(void)
 {
-	this->setX(0);
-	this->setY(0);
+	this->setX(-1);
+	this->setY(-1);
 	return ;
 }
 Missile::~Missile(void)
@@ -64,30 +64,24 @@ void 		Missile::drawMissile(Game *game)
 		attroff(COLOR_PAIR(3));
 		box(stdscr, 0, 0);
 		refresh();
-		// usleep(10000); // creates small delay for the enemies as they move left to right and back.
 	}
 	else
 		this->N = 0;
 }
 int			Missile::missileCollision(int nx, int ny)
 {
-	// int ret = 0;
 	if ((this->getY() == ny && this->getX() == nx)
 	 ||
 		(this->getY() == ny && this->getX() == nx+1) ||
-		(this->getY() == ny && this->getX() == nx-1))
-	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
-	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx+1))
+		(this->getY() == ny && this->getX() == nx-1) ||
+		(this->getY() == ny-1 && this->getX() == nx) ||
+		(this->getY() == ny-1 && this->getX() == nx-1) ||
+		(this->getY() == ny-1 && this->getX() == nx+1) ||
+		(this->getY() == ny && this->getX() == nx+1) ||
+		(this->getY() == ny && this->getX() == nx-1) ||
+		(this->getY() == ny && this->getX() == nx))
 	{
-		// if (this->getN())
-		// 	ret = 1;
 		this->killMissile();
-		// box(stdscr, 0, 0);
-		// refresh();
 		return 1;
 	}
 	return 0;

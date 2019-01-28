@@ -6,13 +6,14 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:54:34 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/27 21:32:20 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 23:03:05 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
 #include "Player.hpp"
 #include "Enemy.hpp"
+
 int	main(void) 
 {
 	int c = 0;
@@ -21,7 +22,8 @@ int	main(void)
 	int y;
 	int number; // number of enemies to spawn
 
-	startX = x = 10;
+	startX = 10;
+	x = 10;
 	y = 2;
 	number = 30;
 	srand(time(NULL));
@@ -29,7 +31,6 @@ int	main(void)
 	initscr();//creates std screen
 	cbreak();//enter raw modal
 	noecho();
-	// nodelay();
 	curs_set(0);
 
 	Game *game = new Game(); // creates an instance of game
@@ -37,60 +38,61 @@ int	main(void)
 	Player *player = new Player();  // creates the movable player
 	Enemy *enemies = new Enemy[number]; // number of enemies on the stack.
 
-	
-	// for (int i = 0; i < number; i++)
-	// {
-	// 	enemies[i].setX(x += 5); //spawns enemies at varying x + 5 offsets
-	// 	if (i % 10 == 0)
-	// 	{
-	// 		enemies[i].setY(y += 5); // will increase the height.
-	// 		enemies[i].setX(x = startX); // returns to the original startX val
-	// 	}
-	// 	enemies[i].setY(y);
-	// 	// enemies[i].setN(1);
-
-	// }
-
-
-	// std::string s = std::to_string(enemies[number-1].getX()) + " " + std::to_string(enemies[number-1].getY());
-	// mvwprintw(stdscr, 3, 2, s.c_str());
 	player->setGame(game);
 	player->drawPlayer();
 	int i = 0;
+	int clock = 0;
+	int lastEnemy = 0;
+	int kills = 0;
+	int trys = 0;
+	int lives = 3;
 	while (1)
 	{
-		for (int i = 0; i < number; i++)
+		// Top left of screen to print lives left
+		std::string s = "You have: " + std::to_string(lives - (trys/6)) + " lives left";
+		mvwprintw(stdscr, 1, 1, s.c_str());
+		if (clock - lastEnemy > 100)
 		{
-			if (enemies[i].getN() == 0)
+			for (int i = 0; i < number; i++)
 			{
-				enemies[i].setY(2); //spawns enemies at varying x + 5 offsets
-				enemies[i].setX(rand() % (game->getMapX())); //spawns enemies at varying x + 5 offsets
-				enemies[i].setN(1);
-				// break;
+				if (enemies[i].getN() == 0)
+				{
+					enemies[i].setY(2); //spawns enemies at varying x + 5 offsets
+					enemies[i].setX((rand() % (game->getMapX()-4))+2); //spawns enemies at varying x + 5 offsets
+					enemies[i].setN(1);
+					lastEnemy = clock;
+					break;
+				}
 			}
 		}
-
-		// missile->drawMissile(game);
 		if ((c = getch()) != ERR)
 		{
 			player->getInput(c, game);
 		}
 		while (i < number)
 		{
-			// mvaddch(2, 2, enemies[i].getX());
-			// mvaddch(2, 5, enemies[i].getY());
 			if (player->missilesCollisions(enemies[i].getX(), enemies[i].getY()))
 			{
 				enemies[i].killEnemy();
-				// usleep(5000);
-			} //checks collisions and should render enemy and missile invisible if true
-			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
-			// mvaddch(2, 2, ' ');
+			} 
+			// Enemy collides with player
+			if (enemies[i].getX() == player->getX() && enemies[i].getY() == player->getY())
+				exit(1);
+			enemies[i++].drawEnemy(); //loop that crreates all the enemies
 		}
 		player->drawMissiles();
 		player->drawPlayer();
 		usleep(5000);
 		i = 0;
+		if (win(enemies, game, number))
+		{
+			trys++;
+			if (trys / 6 >= lives)
+				exit(0);
+		}
+		if (kills == 10)
+			exit(0);
+		clock++;
 	}
 	endwin();
 	delete player; //delete player on the heap

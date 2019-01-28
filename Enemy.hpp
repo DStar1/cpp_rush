@@ -24,16 +24,15 @@ class Enemy : public Junk
 		Enemy(Enemy const & src);
 		Enemy &operator=(Enemy const & rhs);
 		//methods for movements
-		void 		moveRight(void);
-		void 		moveLeft(void);
+		void 		moveDown(void);
 		//methods for game mechanics using ncursus
-		void 		drawEnemy(Game *game);
+		void 		drawEnemy(void);
 		void 		clearEnemy(void);
 		void 		killEnemy(void);
-		void 		moveDown(void);
 	private:
-		int 			l; // has it collided on the left? 1 yes 0 no
-		int 			r; // has it collided on the right? 1 yes 0 no
+		int 	wait;
+
 };
+int 		win(Enemy *enemies, Game *game, int number);
 
 #endif
