@@ -22,7 +22,7 @@ N(100)
 }
 Junk::~Junk(void)
 {
-	std::cout << GREEN << "Junk Destroyed" << RESET <<  std::endl;
+	std::cout << GREEN << "Thanks for Playing ^_^" << RESET <<  std::endl;
 }
 Junk::Junk(Junk const & src)
 {
