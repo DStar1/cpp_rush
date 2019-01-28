@@ -13,7 +13,8 @@
 
 #ifndef JUNK_HPP
 # define JUNK_HPP
-
+# define GREEN "\033[1;42m"
+# define RESET "\033[0m"
 class Junk
 {
 	public:

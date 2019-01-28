@@ -33,9 +33,34 @@ int	main(void)
 	curs_set(0);
 
 	Game *game = new Game(); // creates an instance of game
+	mvprintw(game->getMapY()/4 - 9, game->getMapX()/2,  "      `/hdho` +dho+dddy \n");
+	mvprintw(game->getMapY()/4 - 8, game->getMapX()/2,  "    `+dMNh:   oh: +MMMd \n");
+	mvprintw(game->getMapY()/4 - 7, game->getMapX()/2,  "  .+mMNy-     ` `:dMMd/ \n");
+	mvprintw(game->getMapY()/4 - 6, game->getMapX()/2,  ".omMNy-`      `/dMMh/`  \n");
+	mvprintw(game->getMapY()/4 - 5, game->getMapX()/2,  "dMMMNdddddddo oMMMh` -o \n");
+	mvprintw(game->getMapY()/4 - 4, game->getMapX()/2,  "hdddddddNMMMy sMMMy:hNd \n");
+	mvprintw(game->getMapY()/4 - 3, game->getMapX()/2,  "````````sMMMy .---..--. \n");
+	mvprintw(game->getMapY()/4 - 2, game->getMapX()/2,  "        +dddo           \n");
+	mvprintw(game->getMapY()/4 - 1, game->getMapX()/2,  "                        \n");
+
+	mvprintw(game->getMapY()/4 + 1, game->getMapX()/2,  "       `-/+++++/-`       \n");
+	mvprintw(game->getMapY()/4 + 2, game->getMapX()/2,  "     -oysyyyyyyyyy+-     \n");
+	mvprintw(game->getMapY()/4 + 3, game->getMapX()/2,  "   `+yyy.`-+syyyyyyy+`   \n");
+	mvprintw(game->getMapY()/4 + 4, game->getMapX()/2,  "   oyyyy.   `./oyyyyyo   \n");
+	mvprintw(game->getMapY()/4 + 5, game->getMapX()/2,  "  .yyyyy.       .:oyyy.  \n");
+	mvprintw(game->getMapY()/4 + 6, game->getMapX()/2,  "  .yyyyy.      `.:+yyy.  \n");
+	mvprintw(game->getMapY()/4 + 7, game->getMapX()/2,  "   oyyyy.  `.:+syyyyyo   \n");
+	mvprintw(game->getMapY()/4 + 8, game->getMapX()/2,  "   `+yyy::osyyyyyyyy+`   \n");
+	mvprintw(game->getMapY()/4 + 9, game->getMapX()/2,  "     -+yyyyyyyyyyy+-     \n");
+	mvprintw(game->getMapY()/4 + 10, game->getMapX()/2,  "       `-/+++++:-`       \n");
+
+
+	getch();
+	clear();
 	game->init_ncurses();
 	Player *player = new Player();  // creates the movable player
 	Enemy *enemies = new Enemy[number]; // number of enemies on the stack.
+
 	for (int i = 0; i < number; i++)
 	{
 
@@ -55,9 +80,9 @@ int	main(void)
 	player->drawPlayer();
 	int i = 0;
 	int kills = 0;
-	while (1)
+	int flag = 1;
+	while (flag == 1)
 	{
-		// missile->drawMissile(game);
 		if ((c = getch()) != ERR)
 		{
 			player->getInput(c, game);
@@ -76,10 +101,20 @@ int	main(void)
 		player->drawMissiles();
 		player->drawPlayer();
 		if (win(enemies, game, number))
-			exit(0);
+			flag = 0;
 		if (kills == 10)
-			exit(0);
+			flag = 2;
 		i = 0;
+	}
+	if (flag == 0)
+	{
+		printw("You lose\nPress any key to exit.\n");
+		getch();
+	}
+	else if (flag == 2)
+	{
+		printw("You win.\nPress any key to exit.\n");
+		getch();
 	}
 	endwin();
 	delete player; //delete player on the heap

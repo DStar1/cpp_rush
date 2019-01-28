@@ -69,7 +69,7 @@ int 		win(Enemy *enemies, Game *game, int number)
 {
 	int i = 0;
 	while (i < number)
-	if (enemies[i++].getY() == game->getMapY() - 2)
+	if (enemies[i++].getY() == game->getMapY() - 4)
 	return (1);
 	return (0);
 }
