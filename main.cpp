@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:54:34 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/27 15:09:33 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 18:12:01 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	main() {
 	Game *game = new Game(); // creates an instance of game
 	game->init_ncurses();
 	Player *player = new Player();  // creates the movable player
-	// Missile *missile = new Missile();
-	Enemy enemies[30]; // number of enemies on the stack.
+	Enemy *enemies = new Enemy[number]; // number of enemies on the stack.
 	for (int i = 0; i < number; i++)
 	{
 		
@@ -63,12 +62,17 @@ int	main() {
 		{
 			player->getInput(c, game);
 		}
+		
 		while (i < number)
 		{
-			if (enemies[i].getN() > 0){
-				enemies[i++].drawEnemy(game); //loop that crreates all the enemies
-				// missile->drawMissile(game);
-			}
+			// mvaddch(2, 2, enemies[i].getX());
+			// mvaddch(2, 5, enemies[i].getY());
+			if (player->missilesCollisions(enemies[i].getX(), enemies[i].getY()))
+			{
+				enemies[i].killEnemy();
+			} //checks collisions and should render enemy and missile invisible if true
+			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
+			// mvaddch(2, 2, ' ');
 		}
 		player->drawMissiles();   
 		player->drawPlayer();

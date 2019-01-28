@@ -39,6 +39,8 @@ class Enemy
 		//methods for game mechanics using ncursus
 		void 		drawEnemy(Game *game);
 		// void 		getInput(char c, Game *game); // don't think  we need this
+		void 		clearEnemy(void);
+		void 		killEnemy(void);
 	private:
 		int			x;
 		int			y;

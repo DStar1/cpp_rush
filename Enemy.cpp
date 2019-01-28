@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 14:14:33 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 18:11:56 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,50 +71,61 @@ void 		Enemy::setN(int number)
 {
 	this->N = number;
 }
-void 		Enemy::moveRight(void)
+void 		Enemy::clearEnemy(void)
 {
 	mvaddch(getY(), getX(), ' ');
 	mvaddch(getY() - 1, getX() + 1, ' ');
 	mvaddch(getY() - 1, getX() - 1, ' ');
+}
+
+void 		Enemy::moveRight(void)
+{
+	this->clearEnemy();
 	this->setX(x + 1);
 
 }
+void 		Enemy::killEnemy(void)
+{
+	this->clearEnemy();
+	this->setN(0);
+}
+
 void 		Enemy::moveLeft(void)
 {
-	mvaddch(getY(), getX(), ' ');
-	mvaddch(getY() - 1, getX() + 1, ' ');
-	mvaddch(getY() - 1, getX() - 1, ' ');
+	this->clearEnemy();
 	this->setX(x - 1);
 }
 void 		Enemy::drawEnemy(Game *game)//game instance is passed to know the map size;
 {
-
-	if (l)
+	if (this->getN() > 0)
 	{
-		this->moveLeft();
-		if (this->getX() == 2)
+		if (l)
 		{
-			this->r = 1;
-			this->l = 0;
+			// this->moveLeft();
+			if (this->getX() == 2)
+			{
+				this->r = 1;
+				this->l = 0;
+			}
 		}
-	}
-	else if (r)
-	{
-		this->moveRight();
-		if (this->getX() == game->getMapX() - 2)
+		else if (r)
 		{
-			this->r = 0;
-			this->l = 1;
+			// this->moveRight();
+			if (this->getX() == game->getMapX() - 2)
+			{
+				this->r = 0;
+				this->l = 1;
+			}
 		}
+		attron(COLOR_PAIR(2));
+		mvaddch(this->getY() - 1, getX() + 1, '#');
+		mvaddch(this->getY() - 1, getX() - 1, '#');
+		mvaddch(this->getY(), this->getX(), '#');
+		attroff(COLOR_PAIR(2));
+		box(stdscr, 0, 0);
+		refresh();
+		usleep(1000); // creates small delay for the enemies as they move left to right and back.
 	}
-	attron(COLOR_PAIR(2));
-	mvaddch(this->getY() - 1, getX() + 1, '#');
-	mvaddch(this->getY() - 1, getX() - 1, '#');
-	mvaddch(this->getY(), this->getX(), '#');
-	attroff(COLOR_PAIR(2));
-	box(stdscr, 0, 0);
-	refresh();
-	usleep(1000); // creates small delay for the enemies as they move left to right and back.
 }
 // void 		Enemy::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {

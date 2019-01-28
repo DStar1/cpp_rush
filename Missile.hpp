@@ -35,6 +35,9 @@ class Missile
 		void 		moveUp(void);
 		//methods for game mechanics using ncursus
 		void 		drawMissile(Game *game);
+		int			missileCollision(int x, int y);
+		void 		clearMissile(void);
+		void 		killMissile(void);
 		// void 		getInput(char c, Game *game); // don't think  we need this
 
 	private:

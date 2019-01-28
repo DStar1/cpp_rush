@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 15:02:42 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 18:11:57 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,20 @@ void 		Missile::setN(int number)
 	this->N = number;
 }
 
-void 		Missile::moveUp(void)
+void 		Missile::clearMissile(void)
 {
 	mvaddch(this->getY(), this->getX(), ' ');
+}
+
+void 		Missile::killMissile(void)
+{
+	this->clearMissile();
+	this->setN(0);
+}
+
+void 		Missile::moveUp(void)
+{
+	this->clearMissile();
 	this->setY(this->getY() - 1);
 }
 void 		Missile::drawMissile(Game *game)
@@ -79,15 +90,36 @@ void 		Missile::drawMissile(Game *game)
 	{
 		this->moveUp();
 		attron(COLOR_PAIR(3));
-		mvaddch(this->getY() - 1, this->getX(), '|');
+		mvaddch(this->getY() - 1, this->getX(), '0');
 		attroff(COLOR_PAIR(3));
 		box(stdscr, 0, 0);
 		refresh();
-		usleep(1000); // creates small delay for the enemies as they move left to right and back.
+		usleep(5000); // creates small delay for the enemies as they move left to right and back.
 	}
 	else
 		this->N = 0;
 }
+
+int			Missile::missileCollision(int nx, int ny)
+{
+	if ((this->getY() == ny && this->getX() == nx) ||
+		(this->getY() == ny && this->getX() == nx+1) ||
+		(this->getY() == ny && this->getX() == nx-1) ||
+		(this->getY() == ny-1 && this->getX() == nx-1) ||
+		(this->getY() == ny-1 && this->getX() == nx-1) ||
+		(this->getY() == ny+1 && this->getX() == nx+1) ||
+		(this->getY() == ny+1 && this->getX() == nx+1) ||
+		(this->getY() == ny-1 && this->getX() == nx+1) ||
+		(this->getY() == ny-1 && this->getX() == nx+1))
+	{
+		this->killMissile();
+		box(stdscr, 0, 0);
+		refresh();
+		return 1;
+	}
+	return 0;
+}
+
 // void 		Missile::getInput(char c, Game *game) //game instance is passed to know the map size;
 // {
 // 	if (c == 27)

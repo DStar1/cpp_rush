@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:48 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 14:48:48 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 18:11:59 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ class Player
 		void 		getInput(char c, Game *game);
 		void		setGame(Game *game);
 		void 		drawMissiles(void);
+		int 		missilesCollisions(int ex, int ey);
 		int			currMissile;
 	private:
 		int			x;

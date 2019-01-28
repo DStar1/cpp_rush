@@ -6,12 +6,13 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:42 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 15:03:52 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 18:11:59 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Game.hpp"
 #include "Player.hpp"
+// #include "Enemy.hpp"
 
 Player::Player(void) :
 numberOfMissiles(20)
@@ -117,6 +118,22 @@ void 		Player::drawPlayer(void)
 	refresh();
 }
 
+int 		Player::missilesCollisions(int ex, int ey)
+{
+	for (int i = 0; i < this->numberOfMissiles; i++)
+	{
+		std::string s = std::to_string(this->missile->getX()) + " " + std::to_string(this->missile->getY());
+		mvwprintw(stdscr, 2, 2, s.c_str());
+		if (this->missile->missileCollision(ex, ey))
+		{
+			// std::cout << "coords" << std::endl;
+			return 1;
+			// enemy.killEnemy();// maybe just 
+		}
+	}
+	return 0;
+}
+
 void		Player::setGame(Game *game)
 {
 	this->game = game;
@@ -148,7 +165,7 @@ void 		Player::getInput(char c, Game *game)
 	{
 		this->missile[currMissile].setX(this->getX());
 		this->missile[currMissile].setY(this->getY() - 1);
-		this->missile[currMissile].setN(3);//health is 3?
+		this->missile[currMissile].setN(1);//health is 3?
 		// missile->drawMissile(game); // implementation of projectiles here 
 		currMissile++;
 		currMissile %= this->numberOfMissiles;
