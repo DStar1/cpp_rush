@@ -63,15 +63,9 @@ void  	Game::init_ncurses(void) {
 	init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(6, COLOR_BLUE, COLOR_BLACK);
 	refresh();
-
-	// Draw box/start screen
 	attron(COLOR_PAIR(4));
 	mvaddch(0, 0, c);
 	attroff(COLOR_PAIR(4));
-	// drawEnemy();
 	box(stdscr, 0, 0);
-	// game->drawPlayer();
 	refresh();
-
-	// return (game);
 }

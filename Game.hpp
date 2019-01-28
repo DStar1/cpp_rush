@@ -24,7 +24,6 @@
 
 class Game {
     public:
-		// Game(std::string n);
 		Game(void);
 		~Game(void);
 		Game(Game const & src);
@@ -39,6 +38,5 @@ class Game {
 
 };
 
-// int 		win(Enemy *enemies, int number);
 void 	init_ncurses(void);
 #endif

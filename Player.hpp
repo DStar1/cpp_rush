@@ -34,7 +34,6 @@ class Player : public Junk
 		int 			missilesCollisions(int ex, int ey);
 		int 			currMissile;
 	private:
-		// int 			kills;
 		int 			numberOfMissiles;
 		Missile		*missile;
 		Game 		*game;

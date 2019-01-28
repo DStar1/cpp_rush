@@ -36,7 +36,6 @@ Missile 		&Missile::operator=(Missile const & rhs)
 void 		Missile::clearMissile(void)
 {
 	mvaddch(this->getY(), this->getX(), ' ');
-	// usleep(100);
 	refresh();
 }
 
@@ -60,7 +59,6 @@ void 		Missile::drawMissile(Game *game)
 		attroff(COLOR_PAIR(3));
 		box(stdscr, 0, 0);
 		refresh();
-		// usleep(10000); // creates small delay for the enemies as they move left to right and back.
 	}
 	else
 		this->N = 0;
@@ -68,19 +66,8 @@ void 		Missile::drawMissile(Game *game)
 int			Missile::missileCollision(int nx, int ny)
 {
 	if ((this->getY() == ny && this->getX() == nx))
-	//  ||
-	// 	(this->getY() == ny && this->getX() == nx+1) ||
-	// 	(this->getY() == ny && this->getX() == nx-1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
-	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx+1) ||
-	// 	(this->getY() == ny-1 && this->getX() == nx+1))
 	{
 		this->killMissile();
-		// box(stdscr, 0, 0);
-		// refresh();
 		return 1;
 	}
 	return 0;
