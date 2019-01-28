@@ -13,7 +13,8 @@
 #include "Game.hpp"
 #include "Player.hpp"
 #include "Enemy.hpp"
-int	main(void) 
+#include <curses.h>
+int	main(void)
 {
 	int c = 0;
 	int startX; // initial x value for the enemies
@@ -29,7 +30,6 @@ int	main(void)
 	initscr();//creates std screen
 	cbreak();//enter raw modal
 	noecho();
-	// nodelay();
 	curs_set(0);
 
 	Game *game = new Game(); // creates an instance of game
@@ -46,7 +46,7 @@ int	main(void)
 			enemies[i].setX(x = startX); // returns to the original startX val
 		}
 		enemies[i].setY(y);
-		// enemies[i].setN(1);
+		enemies[i].setN(1);
 
 	}
 	std::string s = std::to_string(enemies[number-1].getX()) + " " + std::to_string(enemies[number-1].getY());
@@ -54,6 +54,7 @@ int	main(void)
 	player->setGame(game);
 	player->drawPlayer();
 	int i = 0;
+	int kills = 0;
 	while (1)
 	{
 		// missile->drawMissile(game);
@@ -64,19 +65,20 @@ int	main(void)
 
 		while (i < number)
 		{
-			// mvaddch(2, 2, enemies[i].getX());
-			// mvaddch(2, 5, enemies[i].getY());
+
 			if (player->missilesCollisions(enemies[i].getX(), enemies[i].getY()))
 			{
 				enemies[i].killEnemy();
-				// usleep(5000);
+				kills++;
 			} //checks collisions and should render enemy and missile invisible if true
-			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
-			// mvaddch(2, 2, ' ');
+			enemies[i++].drawEnemy(); //loop that crreates all the enemies
 		}
 		player->drawMissiles();
 		player->drawPlayer();
-
+		if (win(enemies, game, number))
+			exit(0);
+		if (kills == 10)
+			exit(0);
 		i = 0;
 	}
 	endwin();

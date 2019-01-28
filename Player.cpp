@@ -16,7 +16,8 @@
 Player::Player(void) :
 numberOfMissiles(100)
 {
-	std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
+	// std::cout << "You have: " << numberOfMissiles << " missiles" << std::endl;
+	(void)numberOfMissiles;
 	this->missile = new Missile[100];
 	this->currMissile = 0;
 	return ;
@@ -82,7 +83,6 @@ int 		Player::missilesCollisions(int ex, int ey)
 void		Player::setGame(Game *game)
 {
 	this->game = game;
-	// std::cout << this->game->getMapY() << ", " << this->game->getMapX() << std::endl;
 	this->setX(this->game->getMapX()/2);
 	this->setY(this->game->getMapY()-4);
 

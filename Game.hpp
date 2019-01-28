@@ -12,6 +12,7 @@
 
 #ifndef GAME_HPP
 # define GAME_HPP
+// # include "Enemy.hpp"
 # include <string>
 # include <iostream>
 # include <ncurses.h>
@@ -38,5 +39,6 @@ class Game {
 
 };
 
+// int 		win(Enemy *enemies, int number);
 void 	init_ncurses(void);
 #endif
