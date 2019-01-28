@@ -30,6 +30,7 @@ class Enemy : public Junk
 		void 		drawEnemy(Game *game);
 		void 		clearEnemy(void);
 		void 		killEnemy(void);
+		void 		moveDown(void);
 	private:
 		int 			l; // has it collided on the left? 1 yes 0 no
 		int 			r; // has it collided on the right? 1 yes 0 no

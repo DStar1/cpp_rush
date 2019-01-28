@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Junk.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 15:04:57 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 15:04:59 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:04:29 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Junk 		&Junk::operator=(Junk const & rhs)
 	if (this == &rhs)
 		return (*this);
 	this->x = rhs.getX();
-	// this->y = rhs.getY();
+	this->y = rhs.getY();
 	this->N = rhs.getN();
 	return (*this);
 }

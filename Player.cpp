@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Player.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:42 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/26 17:23:44 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:01:22 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ int 		Player::missilesCollisions(int ex, int ey)
 	// usleep(5000);
 	for (int i = 0; i < this->numberOfMissiles; i++)
 	{
-		std::string s = std::to_string(this->missile[this->currMissile-1].getX()) + " " + std::to_string(this->missile[this->currMissile-1].getY());
-		mvwprintw(stdscr, 2, 2, s.c_str());
-		if (this->missile->missileCollision(ex, ey))
+		// std::string s = std::to_string(this->missile[this->currMissile-1].getX()) + " " + std::to_string(this->missile[this->currMissile-1].getY());
+		// mvwprintw(stdscr, 2, 2, s.c_str());
+		if (this->missile[i].missileCollision(ex, ey))
 		{
+			// this->missile[i].getN() && 
 			// std::cout << "coords" << std::endl;
 			return 1;
 			// enemy.killEnemy();// maybe just
@@ -116,6 +117,5 @@ void 		Player::getInput(char c, Game *game)
 		currMissile++;
 		currMissile %= this->numberOfMissiles;
 	}
-	// drawPlayer();
-
+	drawPlayer();
 }

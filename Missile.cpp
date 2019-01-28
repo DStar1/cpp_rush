@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.cpp                                          :+:      :+:    :+:   */
+/*   Missile.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+        */
+/*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 00:33:47 by lhernand         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:33:59 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Missile::Missile(void)
 {
+	this->setX(0);
+	this->setY(0);
 	return ;
 }
 Missile::~Missile(void)
@@ -44,6 +46,8 @@ void 		Missile::killMissile(void)
 {
 	this->clearMissile();
 	this->setN(0);
+	this->setX(0);
+	this->setY(0);
 }
 void 		Missile::moveUp(void)
 {
@@ -67,10 +71,11 @@ void 		Missile::drawMissile(Game *game)
 }
 int			Missile::missileCollision(int nx, int ny)
 {
-	if ((this->getY() == ny && this->getX() == nx))
-	//  ||
-	// 	(this->getY() == ny && this->getX() == nx+1) ||
-	// 	(this->getY() == ny && this->getX() == nx-1) ||
+	// int ret = 0;
+	if ((this->getY() == ny && this->getX() == nx)
+	 ||
+		(this->getY() == ny && this->getX() == nx+1) ||
+		(this->getY() == ny && this->getX() == nx-1))
 	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
 	// 	(this->getY() == ny-1 && this->getX() == nx-1) ||
 	// 	(this->getY() == ny+1 && this->getX() == nx+1) ||
@@ -78,6 +83,8 @@ int			Missile::missileCollision(int nx, int ny)
 	// 	(this->getY() == ny-1 && this->getX() == nx+1) ||
 	// 	(this->getY() == ny-1 && this->getX() == nx+1))
 	{
+		// if (this->getN())
+		// 	ret = 1;
 		this->killMissile();
 		// box(stdscr, 0, 0);
 		// refresh();
