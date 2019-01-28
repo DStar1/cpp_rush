@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 00:33:43 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 18:11:56 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 19:11:45 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ r(0)
 Enemy::Enemy(int startCol, int startRow, int h) :
 x(startCol),
 y(startRow),
-N	(h),
+N(1),
 l(0),
 r(0)
 {
+	(void)h;
 	return ;
 }
 Enemy::~Enemy(void)
@@ -74,8 +75,9 @@ void 		Enemy::setN(int number)
 void 		Enemy::clearEnemy(void)
 {
 	mvaddch(getY(), getX(), ' ');
-	mvaddch(getY() - 1, getX() + 1, ' ');
-	mvaddch(getY() - 1, getX() - 1, ' ');
+	// mvaddch(getY() - 1, getX() + 1, ' ');
+	// mvaddch(getY() - 1, getX() - 1, ' ');
+	refresh();
 }
 
 void 		Enemy::moveRight(void)
@@ -118,13 +120,13 @@ void 		Enemy::drawEnemy(Game *game)//game instance is passed to know the map siz
 			}
 		}
 		attron(COLOR_PAIR(2));
-		mvaddch(this->getY() - 1, getX() + 1, '#');
-		mvaddch(this->getY() - 1, getX() - 1, '#');
+		// mvaddch(this->getY() - 1, getX() + 1, '#');
+		// mvaddch(this->getY() - 1, getX() - 1, '#');
 		mvaddch(this->getY(), this->getX(), '#');
 		attroff(COLOR_PAIR(2));
-		box(stdscr, 0, 0);
+		// box(stdscr, 0, 0);
 		refresh();
-		usleep(1000); // creates small delay for the enemies as they move left to right and back.
+		// usleep(5000); // creates small delay for the enemies as they move left to right and back.
 	}
 }
 // void 		Enemy::getInput(char c, Game *game) //game instance is passed to know the map size;

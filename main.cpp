@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:54:34 by hasmith           #+#    #+#             */
-/*   Updated: 2019/01/27 18:12:01 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 19:25:59 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int	main() {
 			enemies[i].setX(x = startX); // returns to the original startX val
 		}
 		enemies[i].setY(y);
-		enemies[i].setN(1);
+		// enemies[i].setN(1);
 
 	}
+	std::string s = std::to_string(enemies[number-1].getX()) + " " + std::to_string(enemies[number-1].getY());
+	mvwprintw(stdscr, 3, 2, s.c_str());
 	player->setGame(game);
 	player->drawPlayer();
 	int i = 0;
@@ -70,12 +72,14 @@ int	main() {
 			if (player->missilesCollisions(enemies[i].getX(), enemies[i].getY()))
 			{
 				enemies[i].killEnemy();
+				// usleep(5000);
 			} //checks collisions and should render enemy and missile invisible if true
 			enemies[i++].drawEnemy(game); //loop that crreates all the enemies
 			// mvaddch(2, 2, ' ');
 		}
 		player->drawMissiles();   
 		player->drawPlayer();
+		
 		i = 0;
 	}
 	endwin();

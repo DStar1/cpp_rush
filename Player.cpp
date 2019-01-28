@@ -6,7 +6,7 @@
 /*   By: hasmith <hasmith@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 17:23:42 by lhernand          #+#    #+#             */
-/*   Updated: 2019/01/27 18:11:59 by hasmith          ###   ########.fr       */
+/*   Updated: 2019/01/27 19:23:53 by hasmith          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,10 @@ void 		Player::drawPlayer(void)
 
 int 		Player::missilesCollisions(int ex, int ey)
 {
+	// usleep(5000);
 	for (int i = 0; i < this->numberOfMissiles; i++)
 	{
-		std::string s = std::to_string(this->missile->getX()) + " " + std::to_string(this->missile->getY());
+		std::string s = std::to_string(this->missile[this->currMissile-1].getX()) + " " + std::to_string(this->missile[this->currMissile-1].getY());
 		mvwprintw(stdscr, 2, 2, s.c_str());
 		if (this->missile->missileCollision(ex, ey))
 		{
@@ -137,7 +138,7 @@ int 		Player::missilesCollisions(int ex, int ey)
 void		Player::setGame(Game *game)
 {
 	this->game = game;
-	std::cout << this->game->getMapY() << ", " << this->game->getMapX() << std::endl;
+	// std::cout << this->game->getMapY() << ", " << this->game->getMapX() << std::endl;
 	this->setX(this->game->getMapX()/2);
 	this->setY(this->game->getMapY()-4);
 
@@ -164,11 +165,11 @@ void 		Player::getInput(char c, Game *game)
 	else if (c == ' ')
 	{
 		this->missile[currMissile].setX(this->getX());
-		this->missile[currMissile].setY(this->getY() - 1);
+		this->missile[currMissile].setY(this->getY());
 		this->missile[currMissile].setN(1);//health is 3?
 		// missile->drawMissile(game); // implementation of projectiles here 
 		currMissile++;
 		currMissile %= this->numberOfMissiles;
 	}   
-	drawPlayer();
+	// drawPlayer();
 }
