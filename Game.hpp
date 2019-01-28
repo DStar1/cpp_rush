@@ -10,39 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H_
-# define GAME_H_
-
-#include <string>
-#include <iostream>
+#ifndef GAME_HPP
+# define GAME_HPP
+# include <string>
+# include <iostream>
 # include <ncurses.h>
 # include <curses.h>
 # include <iostream>
 # include <thread>
 # include <chrono>
+# include <ctime>
 
 class Game {
     public:
-        // Game(std::string n);
-        Game(void);
-        Game(int col, int row);
-        ~Game(void);
+		// Game(std::string n);
+		Game(void);
+		~Game(void);
+		Game(Game const & src);
+		Game &operator=(Game const & rhs);
 
-        void getInput(int c);
-        int getX(void);
-        int getY(void);
-
-        void moveRight();
-        void moveLeft();
-        void drawPlayer(void);
-
-    private:
-        int x;
-        int y;
-        int mapx;
-        int mapy;
+		int getMapX(void) const;
+		int getMapY(void) const;
+		void init_ncurses(void);
+	private:
+		int mapx;
+		int mapy;
 
 };
 
-
+void 	init_ncurses(void);
 #endif
